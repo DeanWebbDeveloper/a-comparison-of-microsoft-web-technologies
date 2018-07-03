@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "About";
+
+    var db = Database.Open("StarterSite");
+    var items = db.Query("SELECT Name FROM TechItem");
+}
+
+<hgroup class="title">
+    <h1>@Page.Title.</h1>
+    <h2>Your app description page.</h2>
+</hgroup>
+
+<article>
+    <form method="post" action="">
+        <input type="text" name="userData" />
+        <input type="submit" name="postAction" value="Post data..." />
+    </form>
+    <span class="message-success">
+        @if (IsPost)
+        { <text>@Request.Form["userData"]</text> }
+    </span>
+    <h3>Tech Items</h3>
+    @foreach (var row in items)
+    { <div>@row.Name</div> }
+</article>
+
+<aside>
+    <h3>Aside Title</h3>
+    <p>
+        Use this area to provide additional information.
+    </p>
+    <ul>
+        <li><a href="~/">Home</a></li>
+        <li><a href="~/About">About</a></li>
+        <li><a href="~/Contact">Contact</a></li>
+    </ul>
+</aside>
